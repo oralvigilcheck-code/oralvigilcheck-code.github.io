@@ -1,217 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OralVigil Foundation</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OralVigil Foundation | Awareness. Prevention. Protection.</title>
 
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: Arial, sans-serif; background-color: #fdeef4; color: #333; scroll-behavior: smooth; }
+  <!-- SEO -->
+  <meta name="description" content="OralVigil Foundation is dedicated to oral cancer awareness, early detection, prevention, and community education.">
+  <meta name="keywords" content="oral cancer, awareness, prevention, oral health, screening, NGO, OralVigil Foundation">
+  <meta name="author" content="Dr. Bhedika Billowria">
+  <meta property="og:title" content="OralVigil Foundation">
+  <meta property="og:description" content="Awareness. Prevention. Protection.">
+  <meta property="og:type" content="website">
 
-    /* Scroll Progress Bar */
-    #progress-bar { position: fixed; top: 0; left: 0; width: 0%; height: 5px; background-color: #ff6f91; z-index: 9999; transition: width 0.25s ease; }
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
-    /* Navigation Bar */
-    nav { position: fixed; top: 5px; width: 100%; background-color: #fff0f5; padding: 15px 30px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); z-index: 1000; display: flex; justify-content: space-between; align-items: center; }
-    nav .logo { font-weight: bold; font-size: 22px; color: #ff6f91; text-decoration: none; }
-    nav ul { list-style: none; display: flex; gap: 20px; }
-    nav ul li a { color: #ff6f91; text-decoration: none; font-weight: 500; transition: color 0.3s; }
-    nav ul li a:hover { color: #ff4b70; text-decoration: underline; }
+  <!-- CSS -->
+  <link rel="stylesheet" href="assets/css/style.css">
 
-    /* Hero Section */
-    .hero { height: 100vh; background: url('https://images.unsplash.com/photo-1588776814546-4465b2d5c145?auto=format&fit=crop&w=1350&q=80') center/cover no-repeat; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: #fff; padding: 0 20px; position: relative; }
-    .hero::after { content: ''; position: absolute; top:0; left:0; right:0; bottom:0; background: rgba(253,238,244,0.7); z-index: 1; }
-    .hero-content { position: relative; z-index: 2; opacity: 0; transform: translateY(50px); transition: all 1s ease; }
-    .hero-content.visible { opacity: 1; transform: translateY(0); }
-    .hero h1 { font-size: 48px; margin-bottom: 20px; color: #ff6f91; }
-    .hero p { font-size: 20px; max-width: 600px; margin-bottom: 30px; }
-    .hero a.button { text-decoration: none; background-color: #ff6f91; color: #fff; padding: 12px 25px; border-radius: 25px; font-weight: bold; transition: background 0.3s; }
-    .hero a.button:hover { background-color: #ff4b70; }
-    .socials { margin-top: 20px; display: flex; justify-content: center; gap: 15px; }
-    .socials a { text-decoration: none; color: #fff; background-color: #ff6f91; padding: 10px 15px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 18px; transition: background 0.3s; }
-    .socials a:hover { background-color: #ff4b70; }
-
-    /* Sections */
-    section { padding: 80px 20px; text-align: center; opacity: 0; transform: translateY(50px); transition: all 1s ease; }
-    section.visible { opacity: 1; transform: translateY(0); }
-    section h2 { color: #ff6f91; font-size: 32px; margin-bottom: 20px; }
-    section p { font-size: 18px; max-width: 700px; margin: 0 auto 20px auto; }
-
-    /* Services / Campaigns */
-    .services { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; margin-top: 30px; }.newsletter button { padding: 10px 20px; border: none; border-radius: 25px; background-color: #ff6f91; color: #fff; font-weight: bold; cursor: pointer; transition: background 0.3s; }
-    .newsletter button:hover { background-color: #ff4b70; }
-
-    /* Team Section */
-    #team { padding: 80px 20px; }
-    .team-head { text-align: center; margin-bottom: 50px; }
-    .team-head img { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; margin-bottom: 15px; border: 3px solid #ff6f91; }
-    .team-head h3 { color: #ff6f91; font-size: 24px; margin-bottom: 5px; }
-    .team-head p { font-size: 18px; color: #555; }
-    .team-members { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; }
-    .member-card { background-color: #fff0f5; padding: 20px; border-radius: 15px; text-align: center; max-width: 200px; transition: transform 0.3s, box-shadow 0.3s; }
-    .member-card img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-bottom: 10px; border: 2px solid #ff6f91; }
-    .member-card h4 { color: #ff6f91; margin-bottom: 5px; }
-    .member-card p { color: #555; font-size: 16px; }
-    .member-card:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
-
-    /* Footer */
-    footer { text-align: center; padding: 30px 20px; background-color: #fff0f5; color: #555; font-size: 14px; }
-
-    /* Back to Top Button */
-    #back-to-top { position: fixed; bottom: 30px; right: 30px; display: none; background-color: #ff6f91; color: #fff; border: none; border-radius: 50%; padding: 12px 16px; font-size: 20px; cursor: pointer; z-index: 1000; transition: background 0.3s; }
-    #back-to-top:hover { background-color: #ff4b70; }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .hero h1 { font-size: 36px; }
-      .hero p { font-size: 16px; }
-      nav ul { gap: 10px; }
-      .services, .testimonials, .team-members { flex-direction: column; align-items: center; }
-      .newsletter input { width: 70%; margin-bottom: 10px; }
-      .newsletter button { width: 50%; }
-    }
-  </style>
+  <!-- Icons -->
+  <link rel="icon" href="assets/img/favicon.png">
 </head>
 <body>
 
-<div id="progress-bar"></div>
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <img src="assets/img/logo.png" alt="OralVigil Foundation Logo">
+      </a>
 
-<nav>
-  <a href="#" class="logo">OralVigil</a>
-  <ul>
-    <li><a href="#about">About</a></li>
-    <li><a href="#services">Campaigns</a></li>
-    <li><a href="#testimonials">Testimonials</a></li>
-    <li><a href="#team">Team</a></li>
-    <li><a href="#newsletter">Newsletter</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-</nav>
+      <nav id="navMenu">
+        <a href="index.html" class="active">Home</a>
+        <a href="about.html">About</a>
+        <a href="mission.html">Mission</a>
+        <a href="team.html">Team</a>
+        <a href="projects.html">Projects</a>
+        <a href="contact.html">Contact</a>
+      </nav>
 
-<div class="hero">
-  <div class="hero-content">
-    <h1>Welcome to OralVigil Foundation</h1>
-    <p>Raising awareness for oral health and cancer prevention. Join us in promoting early detection and prevention.</p>
-    <a href="#contact" class="button">Get in Touch</a>
-    <div class="socials">
-      <a href="#"><i class="fab fa-facebook-f"></i></a>
-      <a href="#"><i class="fab fa-twitter"></i></a>
-      <a href="#"><i class="fab fa-instagram"></i></a>
+      <div class="hamburger" id="hamburgerBtn">
+        <span></span><span></span><span></span>
+      </div>
     </div>
-  </div>
-</div>
+  </header>
 
-<section id="about">
-  <h2>About Us</h2>
-  <p>OralVigil Foundation is dedicated to spreading awareness about oral cancer and promoting early detection and prevention. We organize campaigns, workshops, and free check-ups to educate the public about oral health.</p>
-</section>
-
-<section id="services">
-  <h2>Our Campaigns</h2>
-  <div class="services">
-    <div class="service-card">
-      <h3>Free Oral Check-ups</h3>
-      <p>Providing free oral cancer screenings to communities in need.</p>
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="fade-up">Awareness. Prevention. Protection.</h1>
+      <p class="fade-up delay-1">
+        OralVigil Foundation is dedicated to preventing oral cancer through awareness, early detection, and community education.
+      </p>
+      <div class="hero-buttons fade-up delay-2">
+        <a href="about.html" class="btn-primary">Learn More</a>
+        <a href="contact.html" class="btn-secondary">Join Us</a>
+      </div>
     </div>
-    <div class="service-card">
-      <h3>Awareness Workshops</h3>
-      <p>Educational sessions on oral health and early detection techniques.</p>
+  </section>
+
+  <!-- MISSION PREVIEW -->
+  <section class="section">
+    <h2 class="section-title fade-up">Our Mission</h2>
+    <div class="grid-3">
+      <div class="card fade-up">
+        <h3>Awareness</h3>
+        <p>Educating communities about early signs and risk factors.</p>
+      </div>
+      <div class="card fade-up delay-1">
+        <h3>Prevention</h3>
+        <p>Promoting healthy lifestyle choices and oral hygiene practices.</p>
+      </div>
+      <div class="card fade-up delay-2">
+        <h3>Early Detection</h3>
+        <p>Organizing screenings and early diagnosis campaigns.</p>
+      </div>
     </div>
-    <div class="service-card">
-      <h3>School Programs</h3>
-      <p>Teaching children about oral hygiene and prevention practices.</p>
+  </section>
+
+  <!-- ABOUT PREVIEW -->
+  <section class="section alt-section">
+    <h2 class="section-title fade-up">About Us</h2>
+    <p class="center fade-up">
+      A dental-led foundation focused on oral cancer awareness, early detection, and community education.
+    </p>
+    <div class="center">
+      <a href="about.html" class="btn-primary fade-up delay-1">Read More</a>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="testimonials">
-    .service-card { background-color: #fff0f5; padding: 25px; border-radius: 15px; max-width: 250px; transition: transform 0.3s, box-shadow 0.3s; }
-    .service-card:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
-    .service-card h3 { color: #ff6f91; margin-bottom: 10px; }
-
-    /* Testimonials */
-    .testimonials { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; margin-top: 30px; }
-    .testimonial-card { background-color: #fff0f5; padding: 20px; border-radius: 15px; max-width: 300px; font-style: italic; transition: transform 0.3s, box-shadow 0.3s; }
-    .testimonial-card:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
-
-    /* Newsletter */
-    .newsletter input[type="email"] { padding: 10px; border-radius: 25px; border: 1px solid #ff6f91; width: 250px; margin-right: 10px; }<h2>Testimonials</h2>
-  <div class="testimonials">
-    <div class="testimonial-card">
-      <p>"OralVigil's campaign helped me detect early signs of oral cancer. Grateful for their awareness initiatives!"</p>
+  <!-- TEAM PREVIEW -->
+  <section class="section">
+    <h2 class="section-title fade-up">Our Team</h2>
+    <div class="team-preview fade-up delay-1">
+      <img src="assets/img/team-placeholder.jpg" alt="Team Preview">
+      <p>Meet the passionate professionals behind OralVigil Foundation.</p>
     </div>
-    <div class="testimonial-card">
-      <p>"Amazing workshops and free check-ups. The team is very dedicated and friendly."</p>
+    <div class="center">
+      <a href="team.html" class="btn-secondary fade-up delay-2">Meet the Team</a>
     </div>
-    <div class="testimonial-card">
-      <p>"Thanks to OralVigil, I learned how to maintain oral health properly. Highly recommend their programs!"</p>
-    </div>
-  </div>
-</section>
+  </section>
 
-<section id="team">
-  <h2>Our Team</h2>
-  <div class="team-head">
-    <img src="https://via.placeholder.com/150" alt="Head of Foundation">
-    <h3>Dr Satwinder Singh</h3>
-    <p>Founder & Head of OralVigil Foundation</p>
-  </div>
-  <div class="team-members">
-    <div class="member-card">
-      <img src="https://via.placeholder.com/120" alt="Member 1">
-      <h4>Member Name 1</h4>
-      <p>Campaign Coordinator</p>
-    </div>
-    <div class="member-card">
-      <img src="https://via.placeholder.com/120" alt="Member 2">
-      <h4>Member Name 2</h4>
-      <p>Outreach Manager</p>
-    </div>
-    <div class="member-card">
-      <img src="https://via.placeholder.com/120" alt="Member 3">
-      <h4>Member Name 3</h4>
-      <p>Volunteer Lead</p>
-    </div>
-  </div>
-</section>
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>© 2025 OralVigil Foundation. All Rights Reserved.</p>
+    <p class="credit">Designed by <strong>Dr. Bhedika Billowria</strong></p>
+  </footer>
 
-<section id="newsletter">
-  <h2>Subscribe to Our Newsletter</h2>
-  <p>Stay updated on upcoming campaigns and workshops by joining our newsletter.</p>
-  <form class="newsletter" onsubmit="subscribe(event)">
-    <input type="email" placeholder="Your email" required>
-    <button type="submit">Subscribe</button>
-  </form>
-</section>
-
-<section id="contact">
-  <h2>Contact Us</h2>
-  <p>Email: <a href="mailto:contact@oralvigil.org">contact@oralvigil.org</a></p>
-  <p>Phone: +91-XXXXXXXXXX</p>
-</section>
-
-<footer>Designed by Dr. Bhedika Billowria</footer>
-<button id="back-to-top" onclick="scrollToTop()"><i class="fas fa-arrow-up"></i></button>
-
-<script>
-  const observer = new IntersectionObserver(entries => { entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('visible'); }); }, { threshold: 0.1 });
-  document.querySelectorAll('.hero-content, section').forEach(el => observer.observe(el));
-
-  function subscribe(event) { event.preventDefault(); const email = event.target.querySelector('input[type="email"]').value; alert('Thank you for subscribing! ' + email); event.target.reset(); }
-
-  const backToTop = document.getElementById('back-to-top');
-  window.onscroll = function() {
-    if(document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) backToTop.style.display = 'block';
-    else backToTop.style.display = 'none';
-    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const scrolled = (winScroll / height) * 100;
-    document.getElementById('progress-bar').style.width = scrolled + "%";
-  }
-
-  function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
-</script>
+  <!-- JS -->
+  <script src="assets/js/main.js"></script>
 
 </body>
 </html>
